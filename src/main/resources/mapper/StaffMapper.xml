@@ -2,5 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dyhc.sdglgroundconnection.mapper.StaffMapper">
+         <select id="getStaffAll" resultType="com.dyhc.sdglgroundconnection.pojo.Staff">
+        SELECT * FROM staff where 1=1
+        <if test="staffname !=null and staffname !='' ">
+            and staffname like concat('%',#{staffname},'%')
+        </if>
+            and whetherDel !=1
+    </select>
+
+    <update id="getStaffUpd">
+        UPDATE staff SET whetherDel=1 where staffId=#{staffId}
+    </update>
+
+    <update id="getStaffUpdTwo">
+        UPDATE staff SET staffname=#{staffname},sex=#{sex},theUserName=#{theUserName},cardId=#{cardId},qqnumber=#{qqnumber},currentAddress=#{currentAddress},phone=#{phone} where staffId=#{staffId}
+    </update>
+
+    <select id="getStaffUpdTwoById" resultType="com.dyhc.sdglgroundconnection.pojo.Staff">
+        SELECT * FROM WHERE staffId=#{staffId}
+    </select>
 
 </mapper>
