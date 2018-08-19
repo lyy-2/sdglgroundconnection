@@ -19,4 +19,151 @@ public class TravelController{
 
     @Autowired
     private TravelService travelService;
+    
+    /**
+     * 修改信息
+     * @param travel
+     * @return
+     */
+    @RequestMapping("/showTravelUpd.html")
+    public ReponseResult<Integer> showTravelUpd(Travel travel){
+        System.out.println(travel);
+        try{
+            Integer data=0;
+            Integer travel1=travelService.getupdlala(travel);
+            if(travel1>0){
+                data=1;
+            }
+            logger.info(" method:showTravelDel  修改组团社成功！");
+            return ReponseResult.ok(data,"修改取组团社成功！");
+        }catch (Exception e) {
+            logger.error(" method:showTravelDel  修改组团社失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+    /**
+     *添加信息
+     * @param travel
+     * @return
+     */
+    @RequestMapping("/showTravelAdd.html")
+    public ReponseResult<Integer> showTravelAdd(Travel travel){
+        System.out.println(travel);
+        try{
+            travel.setWhetherDel(0);
+            Integer result=0;
+            Integer data=0;
+            result=travelService.getAddTravel(travel);
+            if(result>0){
+                data=1;
+            }
+            logger.info(" method:showTravelAdd  添加组团社成功！");
+            return ReponseResult.ok(data,"添加取组团社成功！");
+        }catch (Exception e) {
+            logger.error(" method:showTravelAdd  添加组团社失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+    /**
+     * 按条件查看分页显示
+     * @param pageNo
+     * @param pageSize
+     * @return
+      */
+    @RequestMapping("/showtravellike.html")
+    public ReponseResult TravelLike(@RequestParam("page") Integer pageNo, @RequestParam("limit") Integer pageSize,@RequestParam("travelName")String travelName){
+        try{
+            System.out.println("..."+travelName+"...");
+            PageInfo<Travel> pageInfoTravel=travelService.listTravelLike(pageNo,pageSize,travelName);
+            ReponseResult<List> data = ReponseResult.ok(pageInfoTravel.getList(), pageInfoTravel.getTotal(), "分页获取组团社成功！");
+            logger.info(" method:TravelLike  分页获取组团社成功！");
+            return data;
+        }catch (Exception e){
+            logger.error(" method:TravelLike  获取组团社数据失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+    /**
+     * 按条件查看
+     * @param travelId
+     * @return
+     */
+    @RequestMapping("/showTravelselectbyid.html")
+    public ReponseResult<Integer> showTravelselectbyid(Integer travelId){
+        try{
+            Integer result=0;
+            Integer data=0;
+            result=travelService.getselectById(travelId);
+            if(result>0){
+                data=1;
+            }
+            logger.info(" method:showTravelselectbyid  添加组团社成功！");
+            return ReponseResult.ok(data,"添加取组团社成功！");
+        }catch (Exception e) {
+            logger.error(" method:showTravelselectbyid  添加组团社失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+    /**
+     * 删除   修改
+     * @param travelId
+     * @return
+     */
+    @RequestMapping("/showTravelupdlala.html")
+    public ReponseResult<Integer> showTravelupdlala(Integer travelId){
+        try{
+            Integer result=0;
+            Integer data=0;
+            result=travelService.getUpdTrave(travelId);
+            if(result>0){
+                data=1;
+            }
+            logger.info(" method:showTravelupdlala  添加组团社成功！");
+            return ReponseResult.ok(data,"添加取组团社成功！");
+        }catch (Exception e) {
+            logger.error(" method:showTravelupdlala  添加组团社失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+    /**
+     * 修改   chakan
+     * @param travelId
+     * @return
+     */
+    @RequestMapping("/findTravelupdlala.html")
+    public ReponseResult findTravelupdlala(Integer travelId){
+        try{
+            Travel travel=travelService.getupdBytravelId(travelId);
+            logger.info(" method:showTravelupdlala  查看组团社成功！");
+            return ReponseResult.ok(travel,"查看取组团社成功！");
+        }catch (Exception e) {
+            logger.error(" method:showTravelupdlala  查看组团社失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
