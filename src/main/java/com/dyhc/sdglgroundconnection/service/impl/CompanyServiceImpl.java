@@ -14,5 +14,19 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Autowired
     private CompanyMapper companyMapper;
+    
+    /**
+     * 查看全部
+     * @return
+     */
+    @Override
+    public Company getCompany() {
+        return companyMapper.getCompany();
+    }
+
+    @Override
+    public Integer getUpdCompany(Company company) {
+        return companyMapper.updateByPrimaryKey(company);
+    }
 
 }
