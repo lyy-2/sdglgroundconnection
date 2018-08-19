@@ -11,4 +11,25 @@ import org.springframework.stereotype.Component;
 @Mapper
 @Component
 public interface TravelMapper extends CommonMapper<Travel> {
+   List<Travel> listTravelLike(@Param("travelName") String travelName);
+    /**
+     * 删除
+     * @param travelId
+     * @return
+     */
+    Integer getUpdTrave(Integer travelId);
+
+    /**
+     * 修改条件查
+     * @param travelId
+     * @return
+     */
+    Travel getupdBytravelId(Integer travelId);
+
+    /**
+     * 修改
+     * @return
+     */
+
+    Integer getupdlala(Travel travel);
 }
