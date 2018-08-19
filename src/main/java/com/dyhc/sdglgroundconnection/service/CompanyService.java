@@ -8,4 +8,16 @@ import org.springframework.stereotype.Component;
  * 公司信息业务接口
  **/
 public interface CompanyService {
+  
+  /**
+     * 查看全部
+     * @return
+     */
+    Company getCompany();
+    /**
+     * 修改信息
+     * @param company
+     * @return
+     */
+    Integer getUpdCompany(Company company);
 }
