@@ -20,4 +20,42 @@ public class CompanyController  {
 
     @Autowired
     private CompanyService companyService;
+    
+    /**
+     * 查看公司
+     * @return
+     */
+    @RequestMapping("/CompanyList.html")
+    public ReponseResult CompanyList(){
+        try{
+            Company company=companyService.getCompany();
+            logger.info(" method:CompanyList  添加组团社成功！");
+            return ReponseResult.ok(company,"添加取组团社成功！");
+        }catch (Exception e){
+            logger.error(" method:CompanyList  获取公司信息数据失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Object> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
+
+    @RequestMapping("/companyupd.html")
+    public ReponseResult<Integer> getcompanyupd(Company company){
+        System.out.println(company.getCompanyName());
+        try{
+            Integer data=0;
+            Integer result=0;
+            result=companyService.getUpdCompany(company);
+            if(result>0){
+                data=1;
+            }
+            logger.info(" method:getcompanyupd  修改组团社成功！");
+            return ReponseResult.ok(data,"修改取组团社成功！");
+        }catch (Exception e) {
+            logger.error(" method:getcompanyupd  修改组团社失败，系统出现异常！");
+            e.printStackTrace();
+            ReponseResult<Integer> err = ReponseResult.err("系统出现异常！");
+            return err;
+        }
+    }
 }
